@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,22 +28,26 @@ public class Product {
     private String origin;
 
     @NotNull
-    private String startPrice;
+    private BigDecimal startPrice;
 
     private String problem;
 
     private ProductStatus status;
 
+    private LocalDateTime atAuctionStart;
+
     private LocalDateTime atAuctionEnd;
 
     @Builder
-    public Product(Long id, String name, String detail, String origin, String startPrice, String problem, LocalDateTime atAuctionEnd) {
+    public Product(Long id, String name, String detail, String origin, BigDecimal startPrice, String problem, ProductStatus status, LocalDateTime atAuctionStart, LocalDateTime atAuctionEnd) {
         this.id = id;
         this.name = name;
         this.detail = detail;
         this.origin = origin;
         this.startPrice = startPrice;
         this.problem = problem;
+        this.status = status;
+        this.atAuctionStart = atAuctionStart;
         this.atAuctionEnd = atAuctionEnd;
     }
 }
