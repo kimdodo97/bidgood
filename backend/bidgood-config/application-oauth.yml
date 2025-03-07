@@ -1,0 +1,4 @@
+oauth2:
+  client-id: afbfdd2be69cabfd9d68ccd53d3d4536
+  client-secret: 3EZD0ueNK5SeGD10AqbW5EtodhbR1m0u
+  redirect-uri: http://localhost:8080/api/oauth2/callback/kakao
