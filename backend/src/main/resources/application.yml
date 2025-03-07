@@ -1,1 +1,4 @@
-spring.application.name=bidgood
+spring:
+  profiles:
+    active: local
+    include: oauth,local

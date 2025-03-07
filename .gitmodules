@@ -1,0 +1,3 @@
+[submodule "backend/bidgood-config"]
+	path = backend/bidgood-config
+	url = https://github.com/kimdodo97/bidgood-config.git
