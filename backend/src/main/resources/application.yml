@@ -2,3 +2,6 @@ spring:
   profiles:
     active: local
     include: oauth,local
+  output:
+    ansi:
+      enabled: always
