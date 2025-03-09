@@ -1,5 +1,7 @@
 package bidgood.auth.dto;
 
+import bidgood.user.domain.SocialType;
+import bidgood.user.dto.UserCreateReq;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -24,4 +26,13 @@ public class KakaoUserInfo {
     public static class KakaoAccount {
         private String email;
     }
+
+    public UserCreateReq toRequest(){
+        return UserCreateReq.builder()
+                .email(getKakaoAccount().getEmail())
+                .socialType(SocialType.KAKAO)
+                .socialId(String.valueOf(id))
+                .build();
+    }
+
 }
