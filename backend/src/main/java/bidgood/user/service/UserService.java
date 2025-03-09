@@ -25,4 +25,8 @@ public class UserService {
 
         return newUser.getId();
     }
+
+    public boolean duplicateUser(String email){
+        return userRepository.existsByEmail(email);
+    }
 }
