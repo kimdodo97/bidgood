@@ -24,6 +24,8 @@ public class User {
 
     private String socialId;
 
+    private String refreshToken;
+
     @Builder
     public User(Long id, String email, String password, SocialType socialType, String socialId) {
         this.id = id;
@@ -31,5 +33,9 @@ public class User {
         this.password = password;
         this.socialType = socialType;
         this.socialId = socialId;
+    }
+
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }
