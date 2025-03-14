@@ -1,5 +1,6 @@
 package bidgood.user.dto;
 
+import bidgood.user.domain.Role;
 import bidgood.user.domain.SocialType;
 import bidgood.user.domain.User;
 import lombok.Builder;
@@ -27,6 +28,7 @@ public class UserCreateReq {
                 .password(password)
                 .socialId(socialId)
                 .socialType(socialType)
+                .role(Role.USER)
                 .build();
     }
 }
