@@ -114,4 +114,10 @@ public class JwtProvider {
             throw new InvalidJwtToken();
         }
     }
+
+    public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken) {
+        response.setStatus(HttpServletResponse.SC_OK);
+        setRefreshTokenHeader(response, refreshToken);
+        setAccessTokenHeader(response, accessToken);
+    }
 }
