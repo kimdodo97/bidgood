@@ -41,10 +41,10 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**", "/swagger-ui/**", "/health", "/v3/api-docs", "/swagger/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login","/logout", "/users/**").permitAll()
+                        .requestMatchers("/oauth2/**").permitAll() // OAuth2 관련 URL도 permitAll() 설정
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
