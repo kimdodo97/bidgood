@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import jakarta.servlet.http.Cookie;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
 
@@ -48,7 +50,7 @@ public class JwtProvider {
                 .sign(Algorithm.HMAC512(secretKey));
     }
 
-    public String createRefreshToken() {
+    public String createRefreshToken(String email) {
         Date now = new Date();
         return JWT.create()
                 .withSubject(REFRESH_TOKEN_SUBJECT)
@@ -57,9 +59,11 @@ public class JwtProvider {
     }
 
     public Optional<String> extractRefreshToken(HttpServletRequest request) {
-        return Optional.ofNullable(request.getHeader(refreshHeader))
-                .filter(refreshToken -> refreshToken.startsWith(BEARER))
-                .map(refreshToken -> refreshToken.replace(BEARER, ""));
+        Optional<String> tokenStatus = Optional.ofNullable(request.getHeader(refreshHeader));
+        if ("TRUE".equalsIgnoreCase(tokenStatus.orElse(""))) {
+            return getRefreshTokenFromCookie(request);
+        }
+        return Optional.empty();
     }
 
     public Optional<String> extractAccessToken(HttpServletRequest request) {
@@ -84,8 +88,13 @@ public class JwtProvider {
         response.setHeader(accessHeader, accessToken);
     }
 
-    public void setRefreshTokenHeader(HttpServletResponse response, String refreshToken) {
-        response.setHeader(refreshHeader, refreshToken);
+    public void setRefreshTokenHeader(HttpServletResponse response,String refreshToken) {
+        response.setHeader(refreshHeader, "TRUE");
+        Cookie refreshCookie = new Cookie("refresh_token", refreshToken);
+        refreshCookie.setHttpOnly(true); // XSS 공격 방지
+        refreshCookie.setPath("/"); // 모든 경로에서 접근 가능
+        refreshCookie.setMaxAge(7 * 24 * 60 * 60); // 7일 동안 유지
+        response.addCookie(refreshCookie);
     }
 
     public void updateRefreshToken(String email, String refreshToken) {
@@ -119,5 +128,16 @@ public class JwtProvider {
         response.setStatus(HttpServletResponse.SC_OK);
         setRefreshTokenHeader(response, refreshToken);
         setAccessTokenHeader(response, accessToken);
+    }
+
+    private Optional<String> getRefreshTokenFromCookie(HttpServletRequest request) {
+        if (request.getCookies() == null) {
+            return Optional.empty();
+        }
+
+        return Arrays.stream(request.getCookies())
+                .filter(cookie -> "refresh_token".equals(cookie.getName())) // 쿠키 이름이 "refresh_token"인지 확인
+                .map(Cookie::getValue)
+                .findFirst();
     }
 }
