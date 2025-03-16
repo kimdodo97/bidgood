@@ -120,7 +120,7 @@ public class JwtProvider {
             return true;
         } catch (Exception e) {
             log.error("{}",e.getClass());
-            throw new InvalidJwtToken();
+            return false;
         }
     }
 
@@ -138,6 +138,6 @@ public class JwtProvider {
         return Arrays.stream(request.getCookies())
                 .filter(cookie -> "refresh_token".equals(cookie.getName())) // 쿠키 이름이 "refresh_token"인지 확인
                 .map(Cookie::getValue)
-                .findFirst();
+                .findAny();
     }
 }
