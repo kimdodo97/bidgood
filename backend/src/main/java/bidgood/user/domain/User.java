@@ -24,12 +24,21 @@ public class User {
 
     private String socialId;
 
+    private String refreshToken;
+
+    private Role role;
+
     @Builder
-    public User(Long id, String email, String password, SocialType socialType, String socialId) {
+    public User(Long id, String email, String password, SocialType socialType, String socialId, Role role) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.socialType = socialType;
         this.socialId = socialId;
+        this.role = role;
+    }
+
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

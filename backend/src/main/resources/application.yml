@@ -1,7 +1,7 @@
 spring:
   profiles:
     active: local
-    include: oauth,local
+    include: oauth, local, jwt
   output:
     ansi:
       enabled: always
