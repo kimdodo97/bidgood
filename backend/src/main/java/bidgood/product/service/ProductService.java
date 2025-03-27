@@ -5,6 +5,9 @@ import bidgood.product.dto.req.ProductRegister;
 import bidgood.product.dto.res.ProductInfo;
 import bidgood.product.exception.ProductNotFound;
 import bidgood.product.repository.ProductRepository;
+import bidgood.user.domain.User;
+import bidgood.user.exception.UserNotFound;
+import bidgood.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,10 +17,16 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
     @Transactional
-    public Long createProduct(ProductRegister productRegister) {
+    public Long registerProduct(String email, ProductRegister productRegister) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(UserNotFound::new);
+
         Product product = productRegister.toEntity();
+        product.setAuthor(user);
+
         return productRepository.save(product).getId();
     }
 
