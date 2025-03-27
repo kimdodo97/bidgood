@@ -1,6 +1,4 @@
 package bidgood.global.jwt;
-
-import bidgood.global.jwt.exception.InvalidJwtToken;
 import bidgood.user.exception.UserNotFound;
 import bidgood.user.repository.UserRepository;
 import com.auth0.jwt.JWT;

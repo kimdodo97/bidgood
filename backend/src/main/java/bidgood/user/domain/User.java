@@ -1,12 +1,13 @@
 package bidgood.user.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import bidgood.product.domain.Product;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -27,6 +28,9 @@ public class User {
     private String refreshToken;
 
     private Role role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<Product> products = new ArrayList<>();
 
     @Builder
     public User(Long id, String email, String password, SocialType socialType, String socialId, Role role) {

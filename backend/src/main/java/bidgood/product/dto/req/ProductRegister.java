@@ -4,22 +4,30 @@ import bidgood.product.domain.Product;
 import bidgood.product.domain.ProductStatus;
 import lombok.Builder;
 import lombok.Getter;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.NoArgsConstructor;
 
 @Getter
-public class ProductRegister{
+@NoArgsConstructor
+public class ProductRegister {
+
     private String name;
     private String detail;
     private String origin;
     private BigDecimal startPrice;
     private String problem;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime atAuctionStart;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime atAuctionEnd;
 
     @Builder
-    public ProductRegister(String name, String detail, String origin, BigDecimal startPrice, String problem, LocalDateTime atAuctionStart, LocalDateTime atAuctionEnd) {
+    public ProductRegister(String name, String detail, String origin, BigDecimal startPrice, String problem,
+                           LocalDateTime atAuctionStart, LocalDateTime atAuctionEnd) {
         this.name = name;
         this.detail = detail;
         this.origin = origin;
@@ -29,7 +37,7 @@ public class ProductRegister{
         this.atAuctionEnd = atAuctionEnd;
     }
 
-    public Product toEntity(){
+    public Product toEntity() {
         return Product.builder()
                 .name(name)
                 .detail(detail)
@@ -41,5 +49,4 @@ public class ProductRegister{
                 .atAuctionEnd(atAuctionEnd)
                 .build();
     }
-
 }
