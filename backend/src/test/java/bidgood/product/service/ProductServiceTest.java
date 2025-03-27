@@ -5,6 +5,9 @@ import bidgood.product.domain.ProductStatus;
 import bidgood.product.dto.req.ProductRegister;
 import bidgood.product.exception.ProductNotFound;
 import bidgood.product.repository.ProductRepository;
+import bidgood.user.domain.User;
+import bidgood.user.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +21,25 @@ import java.time.LocalDateTime;
 class ProductServiceTest {
     @Autowired
     private ProductService productService;
-
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    @BeforeEach
+    public void init(){
+        productRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("경매품은 신규 등록이 가능하다.")
     void registerProductTest() throws Exception {
         //given
+        User user = User.builder()
+                .email("test@test.com")
+                .build();
+        userRepository.save(user);
+
         ProductRegister productRegister = ProductRegister.builder()
                 .name("굿즈1")
                 .detail("비드굿 굿즈")
@@ -37,7 +51,7 @@ class ProductServiceTest {
                 .build();
 
         //when
-        Long resultId = productService.createProduct(productRegister);
+        Long resultId = productService.registerProduct(user.getEmail(),productRegister);
         Product result = productRepository.findById(resultId)
                 .orElseThrow(ProductNotFound::new);
 
