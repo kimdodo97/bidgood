@@ -88,8 +88,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-
         filterChain.doFilter(request,response);
     }
 
@@ -106,6 +104,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         authoritiesMapper.mapAuthorities(userDetailsUser.getAuthorities()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        //컨트롤러에서 인증할 때는어노테이션 사용
     }
 }
