@@ -1,8 +1,7 @@
 package bidgood.product.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import bidgood.user.domain.User;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +17,10 @@ public class Product {
     @Id
     @GeneratedValue
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
 
     @NotNull
     private String name;
@@ -39,8 +42,9 @@ public class Product {
     private LocalDateTime atAuctionEnd;
 
     @Builder
-    public Product(Long id, String name, String detail, String origin, BigDecimal startPrice, String problem, ProductStatus status, LocalDateTime atAuctionStart, LocalDateTime atAuctionEnd) {
+    public Product(Long id, User user, String name, String detail, String origin, BigDecimal startPrice, String problem, ProductStatus status, LocalDateTime atAuctionStart, LocalDateTime atAuctionEnd) {
         this.id = id;
+        this.user = user;
         this.name = name;
         this.detail = detail;
         this.origin = origin;
@@ -49,5 +53,9 @@ public class Product {
         this.status = status;
         this.atAuctionStart = atAuctionStart;
         this.atAuctionEnd = atAuctionEnd;
+    }
+
+    public void setAuthor(User user){
+        this.user = user;
     }
 }
