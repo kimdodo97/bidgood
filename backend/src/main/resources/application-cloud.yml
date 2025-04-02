@@ -1,0 +1,4 @@
+cloud:
+  asw:
+    s3:
+      folder: "src/main/resources/images/"
