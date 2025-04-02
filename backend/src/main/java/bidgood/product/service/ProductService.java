@@ -2,6 +2,7 @@ package bidgood.product.service;
 
 import bidgood.product.domain.Product;
 import bidgood.product.dto.req.ProductRegister;
+import bidgood.product.dto.req.ProductSearch;
 import bidgood.product.dto.res.ProductInfo;
 import bidgood.product.exception.ProductNotFound;
 import bidgood.product.repository.ProductRepository;
@@ -11,6 +12,9 @@ import bidgood.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -35,5 +39,10 @@ public class ProductService {
                 .orElseThrow(ProductNotFound::new);
 
         return ProductInfo.fromEntity(product);
+    }
+
+    public List<ProductInfo> getProductList(ProductSearch productSearch){
+        return productRepository.getList(productSearch)
+                .stream().map(ProductInfo::fromEntity).collect(Collectors.toList());
     }
 }
