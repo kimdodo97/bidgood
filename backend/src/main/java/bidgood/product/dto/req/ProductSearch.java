@@ -6,7 +6,9 @@ import lombok.Getter;
 @Builder
 public class ProductSearch {
     private static final long MAX_SIZE = Long.MAX_VALUE;
-    private String searchWord;
+
+    @Builder.Default
+    private String searchWord = "";
 
     @Builder.Default
     private Integer page = 1;
