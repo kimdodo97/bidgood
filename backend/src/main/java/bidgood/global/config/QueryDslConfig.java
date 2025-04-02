@@ -12,6 +12,13 @@ public class QueryDslConfig {
     @PersistenceContext
     public EntityManager em;
 
+    /**
+     * Creates a JPAQueryFactory bean configured with the injected EntityManager.
+     *
+     * <p>This method instantiates a new JPAQueryFactory, enabling type-safe query construction via QueryDSL in a JPA context.</p>
+     *
+     * @return a newly created JPAQueryFactory instance
+     */
     @Bean
     public JPAQueryFactory jpaQueryFactory(){
         return new JPAQueryFactory(em);

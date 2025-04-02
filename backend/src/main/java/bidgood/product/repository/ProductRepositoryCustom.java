@@ -6,5 +6,11 @@ import bidgood.product.dto.req.ProductSearch;
 import java.util.List;
 
 public interface ProductRepositoryCustom {
-    List<Product> getList(ProductSearch productSearch);
+    /**
+ * Retrieves a list of products matching the provided search criteria.
+ *
+ * @param productSearch the criteria used to filter the products
+ * @return a list of products that satisfy the search criteria
+ */
+List<Product> getList(ProductSearch productSearch);
 }
