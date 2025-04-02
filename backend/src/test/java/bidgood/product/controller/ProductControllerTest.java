@@ -69,7 +69,7 @@ class ProductControllerTest {
                 .build();
 
         //expect
-        mockMvc.perform(post("/product/register")
+        mockMvc.perform(post("/products/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", "Bearer " + accessToken)
                         .content(objectMapper.writeValueAsString(productRegister)))
