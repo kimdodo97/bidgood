@@ -3,6 +3,8 @@ package bidgood.product.service;
 import bidgood.product.domain.Product;
 import bidgood.product.domain.ProductStatus;
 import bidgood.product.dto.req.ProductRegister;
+import bidgood.product.dto.req.ProductSearch;
+import bidgood.product.dto.res.ProductInfo;
 import bidgood.product.exception.ProductNotFound;
 import bidgood.product.repository.ProductRepository;
 import bidgood.user.domain.User;
@@ -16,6 +18,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @SpringBootTest
 class ProductServiceTest {
@@ -64,5 +69,63 @@ class ProductServiceTest {
         assertEquals(productRegister.getAtAuctionStart(),result.getAtAuctionStart());
         assertEquals(productRegister.getAtAuctionEnd(),result.getAtAuctionEnd());
         assertEquals(ProductStatus.PREPARE,result.getStatus());
+    }
+
+    @Test
+    @DisplayName("상품은 여러개 조회가 가능하다.")
+    void getProductList() throws Exception {
+        //given
+        User user = User.builder()
+                .build();
+        userRepository.save(user);
+
+        List<Product> requestProduct = IntStream.range(1,31)
+                .mapToObj(i -> Product.builder()
+                        .name("상품"+i)
+                        .detail("상품설명"+i)
+                        .startPrice(BigDecimal.valueOf(1000+i))
+                        .user(user)
+                        .build())
+                .toList();
+        productRepository.saveAll(requestProduct);
+        //when
+        ProductSearch productSearch = ProductSearch.builder()
+                .searchWord("")
+                .build();
+        List<ProductInfo> result = productService.getProductList(productSearch);
+        //then
+        assertEquals(10L,result.size());
+        assertEquals("상품30", result.get(0).getName());
+        assertEquals("상품설명30", result.get(0).getDetail());
+        assertTrue(BigDecimal.valueOf(1030).compareTo(result.get(0).getStartPrice()) == 0);
+    }
+
+    @Test
+    @DisplayName("검색어에 포함된 상품 이름을 필터링해서 조회 가능하다.")
+    void getProductListWithSearchWord() throws Exception {
+        //given
+        User user = User.builder()
+                .build();
+        userRepository.save(user);
+
+        List<Product> requestProduct = IntStream.range(1,31)
+                .mapToObj(i -> Product.builder()
+                        .name("상품"+i)
+                        .detail("상품설명"+i)
+                        .startPrice(BigDecimal.valueOf(1000+i))
+                        .user(user)
+                        .build())
+                .toList();
+        productRepository.saveAll(requestProduct);
+        //when
+        ProductSearch productSearch = ProductSearch.builder()
+                .searchWord("0")
+                .build();
+        List<ProductInfo> result = productService.getProductList(productSearch);
+
+        //then
+        assertEquals(3L,result.size());
+        assertEquals("상품30", result.get(0).getName());
+        assertEquals("상품설명30", result.get(0).getDetail());
     }
 }
