@@ -35,14 +35,12 @@ public class Product {
 
     private String problem;
 
-    private ProductStatus status;
-
     private LocalDateTime atAuctionStart;
 
     private LocalDateTime atAuctionEnd;
 
     @Builder
-    public Product(Long id, User user, String name, String detail, String origin, BigDecimal startPrice, String problem, ProductStatus status, LocalDateTime atAuctionStart, LocalDateTime atAuctionEnd) {
+    public Product(Long id, User user, String name, String detail, String origin, BigDecimal startPrice, String problem, LocalDateTime atAuctionStart, LocalDateTime atAuctionEnd) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -50,7 +48,6 @@ public class Product {
         this.origin = origin;
         this.startPrice = startPrice;
         this.problem = problem;
-        this.status = status;
         this.atAuctionStart = atAuctionStart;
         this.atAuctionEnd = atAuctionEnd;
     }

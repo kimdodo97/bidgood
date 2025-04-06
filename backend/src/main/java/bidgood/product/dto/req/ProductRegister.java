@@ -43,7 +43,6 @@ public class ProductRegister {
                 .detail(detail)
                 .origin(origin)
                 .problem(problem)
-                .status(ProductStatus.PREPARE)
                 .startPrice(startPrice)
                 .atAuctionStart(atAuctionStart)
                 .atAuctionEnd(atAuctionEnd)

@@ -50,9 +50,7 @@ public class ProductInfo {
                 .origin(product.getOrigin())
                 .startPrice(product.getStartPrice())
                 .problem(product.getProblem())
-                .status(product.getStatus())
                 .atAuctionStart(product.getAtAuctionStart())
-                .atAuctionEnd(product.getAtAuctionEnd())
                 .build();
     }
 }

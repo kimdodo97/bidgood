@@ -68,7 +68,6 @@ class ProductServiceTest {
         assertTrue(productRegister.getStartPrice().compareTo(result.getStartPrice()) == 0);
         assertEquals(productRegister.getAtAuctionStart(),result.getAtAuctionStart());
         assertEquals(productRegister.getAtAuctionEnd(),result.getAtAuctionEnd());
-        assertEquals(ProductStatus.PREPARE,result.getStatus());
     }
 
     @Test
