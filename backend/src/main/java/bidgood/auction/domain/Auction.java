@@ -46,4 +46,9 @@ public class Auction {
     public void modifyStatus(AuctionStatus status) {
         this.status = status;
     }
+
+    public void updateMaxPrice(BigDecimal maxPrice,User user) {
+        this.maxPrice = maxPrice;
+        this.maxPriceUser = user;
+    }
 }
