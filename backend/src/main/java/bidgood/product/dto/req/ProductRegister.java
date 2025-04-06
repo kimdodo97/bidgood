@@ -1,7 +1,6 @@
 package bidgood.product.dto.req;
 
 import bidgood.product.domain.Product;
-import bidgood.product.domain.ProductStatus;
 import lombok.Builder;
 import lombok.Getter;
 import java.math.BigDecimal;

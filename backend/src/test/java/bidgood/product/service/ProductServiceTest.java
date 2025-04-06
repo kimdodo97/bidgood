@@ -1,7 +1,6 @@
 package bidgood.product.service;
 
 import bidgood.product.domain.Product;
-import bidgood.product.domain.ProductStatus;
 import bidgood.product.dto.req.ProductRegister;
 import bidgood.product.dto.req.ProductSearch;
 import bidgood.product.dto.res.ProductInfo;
@@ -19,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @SpringBootTest
