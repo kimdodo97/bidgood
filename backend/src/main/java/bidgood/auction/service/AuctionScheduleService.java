@@ -24,7 +24,7 @@ public class AuctionScheduleService {
 
         Trigger startTrigger = TriggerBuilder.newTrigger()
                 .withIdentity("start-trigger-" + auctionId, "auction")
-                .startAt(Date.from(endTime.atZone(ZoneId.of("Asia/Seoul")).toInstant()))
+                .startAt(Date.from(startTime.atZone(ZoneId.of("Asia/Seoul")).toInstant()))
                 .build();
 
         scheduler.scheduleJob(startJob, startTrigger);
