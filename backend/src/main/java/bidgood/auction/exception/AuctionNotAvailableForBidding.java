@@ -11,6 +11,6 @@ public class AuctionNotAvailableForBidding extends BidGoodException {
 
     @Override
     public int getStatusCode() {
-        return 400;
+        return 409;
     }
 }
