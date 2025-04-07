@@ -4,6 +4,7 @@ import bidgood.auction.domain.Auction;
 import bidgood.auction.domain.AuctionStatus;
 import bidgood.auction.dto.req.BiddingRequest;
 import bidgood.auction.dto.res.BiddingResultResponse;
+import bidgood.auction.exception.AlreadyMaxPriceBidder;
 import bidgood.auction.exception.AuctionNotAvailableForBidding;
 import bidgood.auction.exception.AuctionNotFound;
 import bidgood.auction.exception.MaxPriceIsInvalid;
@@ -69,8 +70,12 @@ public class AuctionService {
         Auction auction = auctionRepository.findByIdForUpdate(biddingRequest.getAuctionId())
                 .orElseThrow(AuctionNotFound::new);
 
-        if (auction.getStatus() != AuctionStatus.SALE) {
+        if (auction.getStatus() == AuctionStatus.SALE || auction.getStatus() == AuctionStatus.COMPLETE) {
             throw new AuctionNotAvailableForBidding();
+        }
+
+        if(auction.getMaxPriceUser().getId().equals(user.getId())){
+            throw new AlreadyMaxPriceBidder();
         }
 
         if(biddingRequest.getPrice().compareTo(auction.getMaxPrice()) < 1){
