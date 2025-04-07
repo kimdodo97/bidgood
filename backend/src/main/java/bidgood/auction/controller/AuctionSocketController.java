@@ -16,8 +16,8 @@ import java.security.Principal;
 @Controller
 @RequiredArgsConstructor
 public class AuctionSocketController {
-    private AuctionService auctionService;
-    private SimpMessagingTemplate messagingTemplate;
+    private final AuctionService auctionService;
+    private final SimpMessagingTemplate messagingTemplate;
 
     @MessageMapping("/bid")
     public void handleBid(BiddingRequest biddingRequest, Principal principal) {
@@ -26,7 +26,7 @@ public class AuctionSocketController {
     }
 
     @MessageExceptionHandler(BidGoodException.class)
-    public void handlerMaxPriceException(BidGoodException exception, Principal principal) {
+    public void handleBiddingExceptions(BidGoodException exception, Principal principal) {
         ErrorResponse errorResponse = new ErrorResponse(String.valueOf(exception.getStatusCode()),exception.getMessage());
         messagingTemplate.convertAndSendToUser(
                 principal.getName(),
