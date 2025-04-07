@@ -3,6 +3,7 @@ package bidgood.auction.domain;
 import bidgood.product.domain.Product;
 import bidgood.user.domain.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Auction {
 
     @Column(nullable = false, precision = 10, scale = 2)
     @NotNull
+    @DecimalMin(value = "0.01",message="입찰가는 0원 보다 무조건 커야한다.")
     private BigDecimal maxPrice;
 
     @ManyToOne
@@ -45,5 +47,10 @@ public class Auction {
 
     public void modifyStatus(AuctionStatus status) {
         this.status = status;
+    }
+
+    public void updateMaxPrice(BigDecimal maxPrice,User user) {
+        this.maxPrice = maxPrice;
+        this.maxPriceUser = user;
     }
 }
