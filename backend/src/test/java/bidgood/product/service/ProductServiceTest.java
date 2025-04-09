@@ -1,7 +1,6 @@
 package bidgood.product.service;
 
 import bidgood.product.domain.Product;
-import bidgood.product.domain.ProductStatus;
 import bidgood.product.dto.req.ProductRegister;
 import bidgood.product.dto.req.ProductSearch;
 import bidgood.product.dto.res.ProductInfo;
@@ -14,15 +13,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class ProductServiceTest {
     @Autowired
     private ProductService productService;
@@ -68,7 +69,6 @@ class ProductServiceTest {
         assertTrue(productRegister.getStartPrice().compareTo(result.getStartPrice()) == 0);
         assertEquals(productRegister.getAtAuctionStart(),result.getAtAuctionStart());
         assertEquals(productRegister.getAtAuctionEnd(),result.getAtAuctionEnd());
-        assertEquals(ProductStatus.PREPARE,result.getStatus());
     }
 
     @Test
