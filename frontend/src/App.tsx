@@ -1,7 +1,9 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router';
-import Login from './pages/Login';
-import Layout from './components/login/Layout';
+import Login from './pages/LoginPage';
+import KakaoLogin from './components/login/KakaoLogin';
+import MainPage from './pages/MainPage';
+import BidPageWrapper from './pages/BIdPageWrapper';
 
 const App: React.FC = () => {
   return (
@@ -10,11 +12,15 @@ const App: React.FC = () => {
         <Route
           path="/login"
           element={
-            <Layout>
-              <Login />
-            </Layout>
+            <Login />
           }
         />
+        <Route
+          path="/login/oauth2/callback/kakao" //redirect_url
+          element={<KakaoLogin />} //당신이 redirect_url에 맞춰 꾸밀 컴포넌트
+        />
+        <Route path='/main' element={<MainPage/>}/>
+        <Route path="/auction/:auctionId" element={<BidPageWrapper />} />
       </Routes>
   );
 };
