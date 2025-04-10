@@ -1,10 +1,11 @@
 import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), VitePWA({
+  plugins: [react(),    tailwindcss(),
+    VitePWA({
     registerType: 'prompt',
     injectRegister: false,
 
@@ -16,7 +17,7 @@ export default defineConfig({
     manifest: {
       name: 'bidgood',
       short_name: 'bidgood',
-      description: 'bidgood frontend',
+      description: 'bidgood',
       theme_color: '#ffffff',
     },
 

@@ -3,8 +3,9 @@ import './PWABadge.css'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 
 function PWABadge() {
-  // check for updates every hour
-  const period = 60 * 60 * 1000
+  // periodic sync is disabled, change the value to enable it, the period is in milliseconds
+// You can remove onRegisteredSW callback and registerPeriodicSync function
+  const period = 0
 
   const {
     
