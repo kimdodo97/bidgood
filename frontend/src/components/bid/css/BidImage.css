@@ -1,0 +1,28 @@
+/* styles/swiper.css */
+
+/* 이전 버튼 */
+.swiper-button-prev {
+    color: gray; /* 회색 색상 */
+    font-size: 20px; /* 버튼 아이콘 크기 */
+    width: 30px; /* 버튼 너비 */
+    height: 30px; /* 버튼 높이 */
+    display: flex; /* Flexbox로 정렬 */
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 중앙 정렬 */
+  }
+  
+  /* 다음 버튼 */
+  .swiper-button-next {
+    color: gray; /* 회색 색상 */
+    font-size: 20px; /* 버튼 아이콘 크기 */
+    width: 30px; /* 버튼 너비 */
+    height: 30px; /* 버튼 높이 */
+    display: flex; /* Flexbox로 정렬 */
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 중앙 정렬 */
+  }
+/* 버튼 감싸는 div 크기 조정 */
+.swiper-button-next, .swiper-button-prev {
+    width: 30px; /* 버튼 div 너비 */
+    height: 30px; /* 버튼 div 높이 */
+  }
