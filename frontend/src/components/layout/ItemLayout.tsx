@@ -2,8 +2,8 @@ import React from 'react';
 import { Outlet } from 'react-router';
 import Footer from '../common/Footer';
 import ItemHeader from '../common/ItemHeader';
-const Layout: React.FC = () => {
 
+const ItemLayout: React.FC = () => {    
   return (
     <div className="flex flex-col items-center w-full bg-gray-100 min-h-screen">
       <div className="flex flex-col w-full bg-white shadow-md flex-grow">
@@ -26,4 +26,4 @@ const Layout: React.FC = () => {
   );
 };
 
-export default Layout;
+export default ItemLayout;
