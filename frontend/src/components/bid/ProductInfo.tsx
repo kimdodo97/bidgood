@@ -12,14 +12,14 @@ import './css/BidImage.css'
 interface ProductInfoProps {
     imageUrl: string[];
     productName: string;
-    productDesciption: string;
+    productDescription: string;
     category: string;
   }
   
   const ProductInfo: React.FC<ProductInfoProps> = ({
     imageUrl,
     productName,
-    productDesciption,
+    productDescription,
     category,
   }) => {
     return (
@@ -47,7 +47,7 @@ interface ProductInfoProps {
         <div className="flex flex-col p-3 gap-2">
           <div className="font-bold text-[20px]">{productName}</div>
           <div className="text-[14px] text-gray-500">{category}</div>
-          <div className="text-[16px] mt-2">{productDesciption}</div>
+          <div className="text-[16px] mt-2">{productDescription}</div>
         </div>
       </div>
     );
