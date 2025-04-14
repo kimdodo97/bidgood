@@ -2,7 +2,7 @@ import React from 'react';
 import searchLogo from '../../assets/search.svg'
 import backIcon from '../../assets/back-icon.svg'
 
-const Header: React.FC = () => {
+const ItemHeader: React.FC = () => {
     const handleBackClick = () => {
         window.history.back();  // 뒤로 가기
     };
@@ -29,4 +29,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default ItemHeader;
