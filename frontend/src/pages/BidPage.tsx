@@ -14,7 +14,7 @@ interface BidPageProps {
 const BidPage: React.FC<BidPageProps> = ({ auctionId, onMessage }) => {
     return (
         <div className='flex-col justify-center p-4'>
-            <ProductInfo imageUrl={[logo1,logo2,logo3]} productName={'테스트상품'} productDesciption={'해당 상품은 테스트 상품입니다.'} category={'건담'}/>
+            <ProductInfo imageUrl={[logo1,logo2,logo3]} productName={'테스트상품'} productDescription={'해당 상품은 테스트 상품입니다.'} category={'건담'}/>
             <div className="fixed bottom-15 left-0 backdrop-blur-sm p-5 z-50 w-full">
                 <BiddingInfo
                     biddingUserCount={10}

@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
             <div
 				aria-label="신규 경매 등록"
 				className="flex flex-col items-center text-gray-600 hover:text-gray-500 flex-1 text-center py-2"
-				onClick={() => onClick("/add-auction")}
+				onClick={() => onClick("/product")}
 			>
 				<img
 					alt="신규 경매 등록"
