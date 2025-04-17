@@ -7,7 +7,6 @@ import BidPageWrapper from './pages/BIdPageWrapper';
 import Layout from './components/layout/Layout';
 import ItemLayout from './components/layout/ItemLayout';
 import ProductAddPage from './pages/ProductAddPage';
-import ProductAddImagePage from './pages/ProductAddImagePage';
 
 const App: React.FC = () => {
   return (
