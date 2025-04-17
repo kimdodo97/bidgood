@@ -6,6 +6,8 @@ import MainPage from './pages/MainPage';
 import BidPageWrapper from './pages/BIdPageWrapper';
 import Layout from './components/layout/Layout';
 import ItemLayout from './components/layout/ItemLayout';
+import ProductAddPage from './pages/ProductAddPage';
+import ProductAddImagePage from './pages/ProductAddImagePage';
 
 const App: React.FC = () => {
   return (
@@ -26,6 +28,7 @@ const App: React.FC = () => {
         </Route>
         <Route element={<ItemLayout/>}>
           <Route path="/auction/:auctionId" element={<BidPageWrapper />} />
+          <Route path="/product" element={<ProductAddPage/>}/>
         </Route>
         
       </Routes>
